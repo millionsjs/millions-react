@@ -1,0 +1,11 @@
+{
+  "name": "millions-react",
+  "version": "0.1.0",
+  "description": "React component wrapper for a Millions renderer",
+  "main": "index.js",
+  "author": "Matthew Henry",
+  "license": "ISC",
+  "peerDependencies": {
+      "millions": "^0.2"
+  }
+}
