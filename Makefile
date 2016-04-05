@@ -1,13 +1,16 @@
+.DELETE_ON_ERROR:
+
 SRCS = millions-react.jsx Renderer.jsx
 
 BROWSERIFY = $(shell npm bin)/browserify
 MAKEDEPS = $(shell npm bin)/makedeps
 BABEL_CLI = $(shell npm bin)/babel
-BFLAGS = -t [ babelify --presets [ es2015 react ] ] --extension=.jsx
+BFLAGS = --extension=.jsx
 BCLIFLAGS =
 
+COMPILED_SRCS = $(addprefix build/compiled/,$(subst .jsx,.js,$(SRCS)))
+
 all: build/dist/millions-react.js
-compiled: $(addprefix build/compiled/,$(subst .jsx,.js,$(SRCS)))
 
 clean:
 	rm -rf build
@@ -17,7 +20,7 @@ build/compiled/%.js: src/%.jsx
 	@mkdir -p $(dir $@)
 	@$(BABEL_CLI) $< -o $@
 
-build/dist/millions-react.js: build/compiled/millions-react.js compiled
+build/dist/millions-react.js: build/compiled/millions-react.js $(COMPILED_SRCS)
 	@echo "bundle  " $<
 	@mkdir -p $(dir $@) build/deps/$(dir $*)
 	@$(BROWSERIFY) $< -o $@ $(BFLAGS) -s MillionsReact
