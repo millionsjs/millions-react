@@ -36,7 +36,7 @@ export default class Renderer extends React.Component {
         }
 
         return (
-            <canvas ref="mountpoint"></canvas>
+            <canvas style={this.props.style} className={this.props.className} ref="mountpoint"></canvas>
         );
     }
 }
